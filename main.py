@@ -8,21 +8,21 @@ comer = ctrl.Antecedent(np.arange(0, 11, 1), 'comer')
 atividade = ctrl.Antecedent(np.arange(0, 11, 1), 'atividade')
 
 #Variaveis de saída (Consequent)
-peso = ctrl.Consequent(np.arange(0, 31, 1), 'peso')
-peso_trap = ctrl.Consequent(np.arange(0, 10, 1), 'peso')
+peso = ctrl.Consequent(np.arange(0, 11, 1), 'peso')
+peso_trap = ctrl.Consequent(np.arange(0, 11, 1), 'peso')
 
 # automf -> Atribuição de categorias automaticamente
 comer.automf(names=['pouco','razoavel','bastante'],)
 atividade.automf(names=['baixa','media','alta'])
 
 # atribuicao sem o automf
-peso['leve'] = fuzz.gaussmf(peso.universe, 0,5)
-peso['medio'] = fuzz.gaussmf(peso.universe, 10, 5)
-peso['pesado'] = fuzz.gaussmf(peso.universe, 20,5)
+peso['leve'] = fuzz.gaussmf(peso.universe, 2, 1.5)
+peso['medio'] = fuzz.gaussmf(peso.universe, 5, 1.5) 
+peso['pesado'] = fuzz.gaussmf(peso.universe, 8, 1.5) 
 
 peso_trap['leve'] = fuzz.trapmf(peso_trap.universe, [0, 2, 3, 4])
-peso_trap['medio'] = fuzz.trapmf(peso_trap.universe, [3, 5, 6, 7])
-peso_trap['pesado'] = fuzz.trapmf(peso_trap.universe, [5, 7, 8, 9])
+peso_trap['medio'] = fuzz.trapmf(peso_trap.universe, [4, 5, 6, 7])
+peso_trap['pesado'] = fuzz.trapmf(peso_trap.universe, [7, 8, 9, 10])
 
 #Visualizando as variáveis
 comer.view()
