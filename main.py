@@ -8,21 +8,22 @@ comer = ctrl.Antecedent(np.arange(0, 11, 1), 'comer')
 atividade = ctrl.Antecedent(np.arange(0, 11, 1), 'atividade')
 
 #Variaveis de saída (Consequent)
-peso = ctrl.Consequent(np.arange(0, 11, 1), 'peso')
-peso_trap = ctrl.Consequent(np.arange(0, 11, 1), 'peso')
+peso = ctrl.Consequent(np.arange(0, 31, 1), 'peso')
+peso_trap = ctrl.Consequent(np.arange(0, 31, 1), 'peso')
 
 # automf -> Atribuição de categorias automaticamente
 comer.automf(names=['pouco','razoavel','bastante'],)
 atividade.automf(names=['baixa','media','alta'])
 
 # atribuicao sem o automf
-peso['leve'] = fuzz.gaussmf(peso.universe, 2, 1.5)
-peso['medio'] = fuzz.gaussmf(peso.universe, 5, 1.5) 
-peso['pesado'] = fuzz.gaussmf(peso.universe, 8, 1.5) 
+peso['leve'] = fuzz.gaussmf(peso.universe, 10, 3)
+peso['medio'] = fuzz.gaussmf(peso.universe, 15, 3)
+peso['pesado'] = fuzz.gaussmf(peso.universe, 25, 3)
 
-peso_trap['leve'] = fuzz.trapmf(peso_trap.universe, [0, 2, 3, 4])
-peso_trap['medio'] = fuzz.trapmf(peso_trap.universe, [4, 5, 6, 7])
-peso_trap['pesado'] = fuzz.trapmf(peso_trap.universe, [7, 8, 9, 10])
+# Funções Trapezoidais para o peso_trap
+peso_trap['leve'] = fuzz.trapmf(peso_trap.universe, [0, 2, 4, 6])
+peso_trap['medio'] = fuzz.trapmf(peso_trap.universe, [5, 7, 10, 12])
+peso_trap['pesado'] = fuzz.trapmf(peso_trap.universe, [10, 15, 25, 30])
 
 #Visualizando as variáveis
 comer.view()
@@ -57,7 +58,7 @@ Calculopeso.compute()
 
 valorpeso = Calculopeso.output['peso']
 
-print("\ncomer %d \nAtividade %d \npeso de %5.2f" %(
+print("\nComer %d \nAtividade %d \nPeso de %5.2f" %(
 notacomer,
 notaatividade,
 valorpeso))
